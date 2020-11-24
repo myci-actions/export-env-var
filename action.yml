@@ -21,8 +21,7 @@ runs:
       run: |
         if ( ${{ inputs.shell }} -ne "powershell" ) { exit 0 }
         echo "${{ inputs.name }}=${{ inputs.value }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      shell: powershell
-      if: runner.os == 'Windows'
+      shell: pwsh
     - name: export environment variable
       run: |
         [ "${{ inputs.shell }}" == "bash" ] || exit 0
