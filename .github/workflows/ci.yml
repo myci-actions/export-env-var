@@ -13,17 +13,23 @@ jobs:
       with:
         name: TEST_VAR
         value: initial_value
-    - name: check test variable value
+    - name: check test variable value in bash
       run: |
         echo TEST_VAR = $TEST_VAR
         [ "$TEST_VAR" == "initial_value" ] || exit 1
       shell: bash
+    - name: check test variable value in powershell
+      run: |
+        Write-Host "TEST_VAR = $TEST_VAR"
+        if ( $TEST_VAR" -ne "initial_value" ) exit 1
+      shell: powershell
+      if: runner.os == 'Windows'
     - name: append value to test variable
       uses: myci-actions/export-env-var@master
       with:
         name: TEST_VAR
         value: $TEST_VAR;appended_value
-    - name: check test variable value after appending value
+    - name: check test variable value after appending value in bash
       run: |
         echo TEST_VAR = $TEST_VAR      
         [ "$TEST_VAR" == "initial_value;appended_value" ] || exit 1
@@ -33,7 +39,7 @@ jobs:
       with:
         name: TEST_VAR
         value: $TEST_VAR;$(arch)
-    - name: check test variable value after appending command output
+    - name: check test variable value after appending command output in bash
       run: |
         echo TEST_VAR = $TEST_VAR
         [ "$TEST_VAR" == "initial_value;appended_value;$(arch)" ] || exit 1
