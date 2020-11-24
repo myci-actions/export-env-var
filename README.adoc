@@ -1,0 +1,26 @@
+# export-env-var
+Set and export environment variable. The resulting environment variable value will be persistent across all the following job steps.
+
+Step syntax:
+
+....
+- name: <name>
+  uses: myci-actions/append-to-path-windows@<version>
+  with:
+    path: <path>
+    env-var: <env-var-name>
+....
+
+Arguments:
+
+- `<path>` - Path to append.
+- `<env-var-name>` - Environment variable name to append the path to. Default value is `PATH`.
+
+Step example:
+....
+- name: add CoAPP path to module lookup paths
+  uses: myci-actions/append-to-path-windows@2
+  with:
+    path: C:\Program Files (x86)\Outercurve Foundation\Modules
+    env-var: PSModulePath
+....
