@@ -10,20 +10,8 @@ inputs:
   value:
     description: 'value of the variable'
     required: true
-  shell:
-    description: 'shell type to evaluate the variable value in'
-    required: false
-    default: bash
 runs:
   using: "composite"
   steps:
     - name: export environment variable
-      run: |
-        if ( ${{ inputs.shell }} -ne "powershell" ) { exit 0 }
-        echo "${{ inputs.name }}=${{ inputs.value }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      shell: pwsh
-    - name: export environment variable
-      run: |
-        [ "${{ inputs.shell }}" == "bash" ] || exit 0
-        echo "${{ inputs.name }}=${{ inputs.value }}" >> $GITHUB_ENV
-      shell: bash
+      run: echo "${{ inputs.name }}=${{ inputs.value }}" >> $GITHUB_ENV
