@@ -1,19 +1,21 @@
-name: 'Append path to an environment variable in windows'
-description: 'Permanently append path to a specified windows environment variable.'
+name: 'Set and export environment variable'
+description: 'Set and export environment variable to be available for the steps that follow.'
 branding:
   icon: 'archive'
   color: 'purple'
 inputs:
-  path:
-    description: 'path to append'
+  name:
+    description: 'name of the variable'
     required: true
-  env-var:
-    description: 'environment variable name to append the path to'
-    required: false
-    default: 'PATH'
+  value:
+    description: 'value of the variable'
+    required: true
 runs:
   using: "composite"
   steps:
-    - name: append path
-      run: echo "${{ inputs.env-var }}=$env:${{ inputs.env-var }};${{ inputs.path }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      shell: powershell
+    # - name: export environment variable
+    #   run: echo "${{ inputs.name }}=${{ inputs.value }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+    #   shell: powershell
+    - name: export environment variable
+      run: echo "${{ inputs.name }}=${{ inputs.value }}" >> $GITHUB_ENV
+      shell: bash

@@ -1,0 +1,40 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        runs-on: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+    - name: set test variable
+      uses: myci-actions/export-env-var@master
+      with:
+        name: TEST_VAR
+        value: initial_value
+    - name: check test variable value
+      run: |
+        echo TEST_VAR = $TEST_VAR
+        [ "$TEST_VAR" -eq "initial_value" ] && exit 1
+      shell: bash
+    - name: append value to test variable
+      uses: myci-actions/export-env-var@master
+      with:
+        name: TEST_VAR
+        value: $TEST_VAR;appended_value
+    - name: check test variable value after appending value
+      run: |
+        echo TEST_VAR = $TEST_VAR      
+        [ "$TEST_VAR" -eq "initial_value;appended_value" ] && exit 1
+      shell: bash
+    - name: append command output to test variable
+      uses: myci-actions/export-env-var@master
+      with:
+        name: TEST_VAR
+        value: $TEST_VAR;$(arch)
+    - name: check test variable value after appending command output
+      run: |
+        echo TEST_VAR = $TEST_VAR
+        [ "$TEST_VAR" -eq "initial_value;appended_value;$(arch)" ] && exit 1
+      shell: bash
+    

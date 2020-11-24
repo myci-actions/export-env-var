@@ -5,22 +5,22 @@ Step syntax:
 
 ....
 - name: <name>
-  uses: myci-actions/append-to-path-windows@<version>
+  uses: myci-actions/export-env-var@<version>
   with:
-    path: <path>
-    env-var: <env-var-name>
+    name: <variable-name>
+    value: <variable-value>
 ....
 
 Arguments:
 
-- `<path>` - Path to append.
-- `<env-var-name>` - Environment variable name to append the path to. Default value is `PATH`.
+- `<variable-name>` - Name of the variable to set.
+- `<variable-value>` - Variable value.
 
 Step example:
 ....
 - name: add CoAPP path to module lookup paths
-  uses: myci-actions/append-to-path-windows@2
+  uses: myci-actions/export-env-var@1
   with:
-    path: C:\Program Files (x86)\Outercurve Foundation\Modules
-    env-var: PSModulePath
+    name: PSModulePath
+    value: $env:PSModulePath;C:\Program Files (x86)\Outercurve Foundation\Modules
 ....
