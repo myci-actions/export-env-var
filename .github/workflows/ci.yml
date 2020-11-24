@@ -21,7 +21,7 @@ jobs:
     - name: check test variable value in powershell
       run: |
         Write-Host "TEST_VAR = $TEST_VAR"
-        if ( $TEST_VAR -ne "initial_value" ) exit 1
+        if ( $TEST_VAR -ne "initial_value" ) { exit 1 }
       shell: powershell
       if: runner.os == 'Windows'
     - name: append value to test variable
