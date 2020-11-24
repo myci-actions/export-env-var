@@ -53,6 +53,6 @@ jobs:
     - name: check test variable value after appending command output in powershell
       run: |
         Write-Host "TEST_VAR = $env:TEST_VAR"
-        if ( $env:TEST_VAR -ne "initial_value;appended_value;$env:PROCESSOR_ARCHITECTURE" ) { exit 1 }
+        if ( $env:TEST_VAR -ne "initial_value;appended_value;x86_64" ) { exit 1 }
       shell: powershell
       if: runner.os == 'Windows'
