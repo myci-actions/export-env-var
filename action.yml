@@ -15,3 +15,4 @@ runs:
   steps:
     - name: export environment variable
       run: echo "${{ inputs.name }}=${{ inputs.value }}" >> $GITHUB_ENV
+      shell: bash
