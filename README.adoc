@@ -1,5 +1,5 @@
 # export-env-var
-Set and export environment variable. The resulting environment variable value will be persistent across all the following job steps.
+Set and export environment variable in bash. The resulting environment variable value will be persistent across all the following job steps.
 
 Step syntax:
 
@@ -18,9 +18,9 @@ Arguments:
 
 Step example:
 ....
-- name: add CoAPP path to module lookup paths
+- name: add path to PATH environment variable
   uses: myci-actions/export-env-var@1
   with:
-    name: PSModulePath
-    value: $env:PSModulePath;C:\Program Files (x86)\Outercurve Foundation\Modules
+    name: PATH
+    value: $PATH:/some/path
 ....
