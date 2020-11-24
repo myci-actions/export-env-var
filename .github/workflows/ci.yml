@@ -3,6 +3,7 @@ on: [push, pull_request]
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         runs-on: [windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.runs-on }}
@@ -15,7 +16,7 @@ jobs:
     - name: check test variable value
       run: |
         echo TEST_VAR = $TEST_VAR
-        [ "$TEST_VAR" -eq "initial_value" ] && exit 1
+        [ "$TEST_VAR" == "initial_value" ] && exit 1
       shell: bash
     - name: append value to test variable
       uses: myci-actions/export-env-var@master
@@ -25,7 +26,7 @@ jobs:
     - name: check test variable value after appending value
       run: |
         echo TEST_VAR = $TEST_VAR      
-        [ "$TEST_VAR" -eq "initial_value;appended_value" ] && exit 1
+        [ "$TEST_VAR" == "initial_value;appended_value" ] && exit 1
       shell: bash
     - name: append command output to test variable
       uses: myci-actions/export-env-var@master
@@ -35,6 +36,6 @@ jobs:
     - name: check test variable value after appending command output
       run: |
         echo TEST_VAR = $TEST_VAR
-        [ "$TEST_VAR" -eq "initial_value;appended_value;$(arch)" ] && exit 1
+        [ "$TEST_VAR" == "initial_value;appended_value;$(arch)" ] && exit 1
       shell: bash
     
