@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     steps:
     - name: set test variable
-      uses: myci-actions/export-env-var@master
+      uses: myci-actions/export-env-var@main
       with:
         name: TEST_VAR
         value: initial_value
@@ -25,7 +25,7 @@ jobs:
       shell: powershell
       if: runner.os == 'Windows'
     - name: append value to test variable
-      uses: myci-actions/export-env-var@master
+      uses: myci-actions/export-env-var@main
       with:
         name: TEST_VAR
         value: $TEST_VAR;appended_value
@@ -41,7 +41,7 @@ jobs:
       shell: powershell
       if: runner.os == 'Windows'
     - name: append command output to test variable
-      uses: myci-actions/export-env-var@master
+      uses: myci-actions/export-env-var@main
       with:
         name: TEST_VAR
         value: $TEST_VAR;$(arch)
